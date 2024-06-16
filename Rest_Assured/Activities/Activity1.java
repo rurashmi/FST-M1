@@ -46,8 +46,14 @@ public class Activity1 {
         //Save the response
         Response response = given().spec(requestSpec).body(reqBody).when().post();
         petId = response.then().extract().path("id");
+        System.out.println(response.getBody().asPrettyString());
         //Assertions
         response.then().spec(responseSpec);
+        //Assertions
+        response.then().body("id", equalTo(770));
+        response.then().body("name", equalTo("Fiona"));
+        response.then().body("status", equalTo("alive"));
+
 
     }
     @Test(priority = 2)
@@ -58,6 +64,8 @@ public class Activity1 {
                 when().get("/{petId}").
                 then().spec(responseSpec);
 
+        //System.out.println(response.getBody().asPrettyString());
+
     }
 
     @Test(priority = 3)
@@ -66,7 +74,8 @@ public class Activity1 {
         //sent request, get response and assert
         given().spec(requestSpec).pathParam("petId", petId).
                 when().delete("/{petId}").
-                then().statusCode(200).body("message", equalTo("" + petId));
+                then().statusCode(200).body("message", equalTo("" + petId)).log().ifValidationFails();
+
 
     }
 }

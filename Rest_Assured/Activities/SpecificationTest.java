@@ -47,7 +47,9 @@ public class SpecificationTest {
         Response response = given().spec(requestSpec).body(reqBody).when().post();
         petId = response.then().extract().path("id");
         //Assertions
-        response.then().spec(responseSpec);
+        response.then().body("id", equalTo(770));
+        response.then().body("name", equalTo("Fiona"));
+        response.then().body("status", equalTo("alive"));
 
     }
     @Test(priority = 2)
@@ -58,6 +60,11 @@ public class SpecificationTest {
                 when().get("/{petId}").
                 then().spec(responseSpec);
 
+        // Assertion
+        responseSpec.then().body("id", equalTo(770));
+        responseSpec.then().body("name", equalTo("Fiona"));
+        responseSpec.then().body("status", equalTo("alive"));
+
     }
 
     @Test(priority = 3)
@@ -66,7 +73,8 @@ public class SpecificationTest {
         //sent request, get response and assert
         given().spec(requestSpec).pathParam("petId", petId).
                 when().delete("/{petId}").
-                then().statusCode(200).body("message", equalTo("" + petId));
+                then().statusCode(201).body("message", equalTo("" + petId));
+
 
     }
     }
