@@ -1,7 +1,10 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
@@ -24,13 +27,20 @@ public class Activity9 {
         System.out.println("Home page title is: " + driver.getTitle());
 
         // Find the change content button
-        driver.findElement(By.xpath("//button[@onCLick = 'loadText()']")).click();
+        driver.findElement(By.xpath("//button[@onclick = 'loadText()']")).click();
 
 
         // Print the confirmation message
-        String message = driver.findElement(By.xpath("//div[id ='action-confirmation']")).getText();
+        String message = driver.findElement(By.xpath("//div[@id ='ajax-content']/h1")).getText();
         System.out.println("Login message: " + message);
 
+
+
+        WebElement delayedText = driver.findElement(By.tagName("h3"));
+        System.out.println(delayedText.getText());
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(By.tagName("h3"), "I'm late!"));
+        String lateMessage = driver.findElement(By.xpath("//div[@id ='ajax-content']/h3")).getText();
+        System.out.println("Late message: " + lateMessage);
         // Close the browser
         driver.close();
     }

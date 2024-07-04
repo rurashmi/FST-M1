@@ -28,11 +28,23 @@ public class Activity7 {
         WebElement box1 = driver.findElement(By.id("droppable"));
         WebElement box2 = driver.findElement(By.id("dropzone2"));
 
-        // actions
+        // drag and drop to box1
         builder.clickAndHold(football).moveToElement(box1).pause(2000).release().build().perform();
         //Verify
         String dropzone1Verify = box1.getText();
-
+        System.out.println(dropzone1Verify);
+        if (dropzone1Verify.contains("Dropped!")){
+            System.out.println("The ball was dropped in box1");
+        }
+        else{
+            System.out.println("The ball was not dragged to the box");
+        }
+        //drag and drop to box2
+        builder.clickAndHold(football).moveToElement(box2).pause(2000).release().build().perform();
+        String dropzone2Verify = box2.getText();
+        if (dropzone2Verify.contains("Dropped!")){
+            System.out.println("The ball was dropped in box2");
+        }
 
         //close browser
         driver.quit();
