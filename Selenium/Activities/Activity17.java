@@ -16,7 +16,7 @@ public class Activity17 {
         WebDriver driver = new FirefoxDriver();
 
         //WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        //OPen the browser
+        //Open the browser
         driver.get("https://v1.training-support.net/selenium/selects");
 
         //get title
@@ -26,11 +26,15 @@ public class Activity17 {
         //find elements
         WebElement dropdown = driver.findElement(By.id("single-select"));
         Select singleSelect = new Select(dropdown);
-
-        singleSelect.selectByVisibleText("Options2");
+        // Select the second option using the visible text
+        singleSelect.selectByVisibleText("Option 2");
         System.out.println("Second option =" +singleSelect.getFirstSelectedOption().getText());
-
-
+        //Select the third option using index
+        singleSelect.selectByIndex(3);
+        System.out.println("Third option =" +singleSelect.getFirstSelectedOption().getText());
+        //Select the fourth option using value
+        singleSelect.selectByValue("4");
+        System.out.println("Fourth option =" +singleSelect.getFirstSelectedOption().getText());
 
         //close browser
         driver.quit();
