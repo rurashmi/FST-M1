@@ -12,9 +12,8 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.List;
 
-public class Activity6_CRM {
+public class Activity7_CRM {
     public static void main(String[] args) throws InterruptedException{
         //Webdriver manager installation and set up
         WebDriverManager.firefoxdriver().setup();
@@ -33,26 +32,26 @@ public class Activity6_CRM {
         //CLick on login button
         driver.findElement(By.id("bigbutton")).click();
         //Wait for home page
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("grouptab_3")));
-        WebElement Activity = driver.findElement(By.id("grouptab_3"));
-        WebElement ActivityList =driver.findElement(By.id("moduleTab_9_Meetings"));
-
-        System.out.println("Name of the tab is: "+ Activity.getText());
-
+        WebElement dashboard = driver.findElement(By.id("tab0"));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("tab0")));
+        System.out.println("Home page title after login is: "+ driver.getTitle());
+        System.out.println(dashboard.getText());
+        Assertions.assertEquals("SUITECRM DASHBOARD", dashboard.getText());
+        //Navigate to Sales-> Leads
         //Actions object
         Actions builder = new Actions(driver);
 
         // Clicking on the Hidden SubMenu
-        builder.moveToElement(Activity).click().build().perform();
-        driver.findElement(By.id("moduleTab_9_Meetings")).click();
-        //Sleep
-        Thread.sleep(10);
-        WebElement Meetings = driver.findElement(By.xpath("//div[@class='moduleTitle']/h2"));
-
-        System.out.println("Activity meeting menu list is: "+ Meetings.getText());
-        Assertions.assertEquals("Meetings", Meetings.getText());
-
-
+        WebElement Sales = driver.findElement(By.id("grouptab_0"));
+        builder.moveToElement(Sales).click().build().perform();
+        driver.findElement(By.id("moduleTab_9_Leads")).click();
+        //WebElement SalesHomepage = driver.findElement(By.xpath("//div[@class='moduleTitle']/h2"));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='moduleTitle']/h2")));
+        WebElement addInfo = driver.findElement(By.xpath("//table/tbody/tr[1]/td[10]/span/span"));
+        //click on additional info icon
+        addInfo.click();
+        System.out.println("Additional info in the leads table is: "+ addInfo.getAttribute("title"));
+        Assertions.assertEquals("Additional Details", addInfo.getAttribute("title"));
         //Close the browser
         driver.quit();
 
