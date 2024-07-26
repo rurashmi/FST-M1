@@ -8,7 +8,7 @@ Feature: Testing with Tags
     Then Alert opens
     And Read the text from it and print it
     And Close the alert
-    And Close Browser
+    And Close the browser
 
   @ConfirmAlert
   Scenario: Test for Confirm Alert
@@ -17,7 +17,7 @@ Feature: Testing with Tags
     Then Alert opens
     And Read the text from it and print it
     And Close the alert with Cancel
-    And Close Browser
+    And Close the browser
 
   @PromptAlert
   Scenario: Test for Prompt Alert
@@ -27,4 +27,4 @@ Feature: Testing with Tags
     And Read the text from it and print it
     And Write a custom message in it
     And Close the alert
-    And Close Browser
+    And Close the browser

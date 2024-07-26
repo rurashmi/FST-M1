@@ -3,6 +3,6 @@ Feature: Login Test
 
   Scenario: Testing Login
     Given User is on the login page
-    When The user enters {username} and {password}
+    When The user enters username and password
     Then Read the page title and confirmation message
     And Close the Browser
