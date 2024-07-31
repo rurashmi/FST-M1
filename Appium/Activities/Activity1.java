@@ -38,16 +38,16 @@ public class Activity1 {
         driver.findElement(AppiumBy.id("com.miui.calculator:id/btn_7_s")).click();
 
         //Find the multiply button and tap it
-        driver.findElement(AppiumBy.id("com.miui.calculator:id/btn_mul_s")).click();
+        driver.findElement(AppiumBy.accessibilityId("multiply")).click();
 
-        //Find the number 9 and tap it
-        driver.findElement(AppiumBy.id("com.miui.calculator:id/btn_9_s")).click();
+        //Find the number 6 and tap it
+        driver.findElement(AppiumBy.id("com.miui.calculator:id/btn_6_s")).click();
 
         // Find the equal button and tap it
         driver.findElement(AppiumBy.accessibilityId("equals")).click();
         //Assertions
         String result = driver.findElement(AppiumBy.id("result")).getText();
-        Assert.assertEquals(result, "= 63");
+        Assert.assertEquals(result, "= 42");
 
     }
     // Tear down method
